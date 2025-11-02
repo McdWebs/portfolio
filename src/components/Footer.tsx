@@ -1,22 +1,17 @@
-import { Box, Container, Typography, IconButton, Link } from '@mui/material';
-import { motion } from 'framer-motion';
-import {
-  Email,
-  LinkedIn,
-  GitHub,
-  Twitter,
-} from '@mui/icons-material';
+import { Box, Container, Typography, IconButton, Link } from "@mui/material";
+import { motion } from "framer-motion";
+import { Email, LinkedIn, GitHub, Twitter } from "@mui/icons-material";
 
 const Footer = () => {
   const socialLinks = [
-    { icon: <Email />, url: '#', label: 'Email' },
-    { icon: <LinkedIn />, url: '#', label: 'LinkedIn' },
-    { icon: <GitHub />, url: '#', label: 'GitHub' },
-    { icon: <Twitter />, url: '#', label: 'Twitter' },
+    { icon: <Email />, url: "#", label: "Email" },
+    { icon: <LinkedIn />, url: "#", label: "LinkedIn" },
+    { icon: <GitHub />, url: "#", label: "GitHub" },
+    { icon: <Twitter />, url: "#", label: "Twitter" },
   ];
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -24,9 +19,9 @@ const Footer = () => {
       id="contact"
       sx={{
         py: { xs: 10, md: 15 },
-        position: 'relative',
-        background: '#0A0A0A',
-        borderTop: '1px solid rgba(168, 168, 168, 0.1)',
+        position: "relative",
+        background: "#0A0A0A",
+        borderTop: "1px solid rgba(168, 168, 168, 0.1)",
       }}
     >
       <Container maxWidth="lg">
@@ -38,47 +33,98 @@ const Footer = () => {
         >
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               gap: 6,
             }}
           >
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
+              onClick={scrollToTop}
             >
-              <Typography
-                variant="h3"
-                onClick={scrollToTop}
+              <Box
                 sx={{
-                  fontFamily: '"Playfair Display", serif',
-                  fontWeight: 400,
-                  color: '#A8A8A8',
-                  letterSpacing: '0.05em',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "16px",
                   mb: 4,
-                  cursor: 'pointer',
-                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-                  position: 'relative',
-                  '&::after': {
+                  position: "relative",
+                  "&::after": {
                     content: '""',
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: -8,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
+                    left: "50%",
+                    transform: "translateX(-50%)",
                     width: 0,
-                    height: '1px',
-                    background: '#A8A8A8',
-                    transition: 'width 0.3s ease',
+                    height: "1px",
+                    background: "#A8A8A8",
+                    transition: "width 0.3s ease",
                   },
-                  '&:hover::after': {
-                    width: '100%',
+                  "&:hover::after": {
+                    width: "100%",
                   },
                 }}
               >
-                MCD webs
-              </Typography>
+                <Box
+                  component="svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 100 100"
+                  sx={{
+                    width: { xs: 48, sm: 56, md: 64 },
+                    height: { xs: 48, sm: 56, md: 64 },
+                    color: "#A8A8A8",
+                  }}
+                >
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="48"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <g
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                  >
+                    <circle cx="50" cy="50" r="6" fill="currentColor" />
+                    <line x1="50" y1="44" x2="50" y2="30" />
+                    <circle cx="50" cy="24" r="6" fill="currentColor" />
+                    <line x1="56" y1="50" x2="70" y2="50" />
+                    <circle cx="76" cy="50" r="6" fill="currentColor" />
+                    <line x1="50" y1="56" x2="50" y2="70" />
+                    <circle cx="50" cy="76" r="6" fill="currentColor" />
+                    <line x1="44" y1="50" x2="30" y2="50" />
+                    <circle cx="24" cy="50" r="6" fill="currentColor" />
+                    <line x1="56" y1="44" x2="68" y2="32" />
+                    <circle cx="72" cy="28" r="5" fill="currentColor" />
+                    <line x1="44" y1="56" x2="32" y2="68" />
+                    <circle cx="28" cy="72" r="5" fill="currentColor" />
+                    <line x1="56" y1="56" x2="68" y2="68" />
+                    <circle cx="72" cy="72" r="5" fill="currentColor" />
+                    <line x1="44" y1="44" x2="32" y2="32" />
+                    <circle cx="28" cy="28" r="5" fill="currentColor" />
+                  </g>
+                </Box>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontFamily: '"Playfair Display", serif',
+                    fontWeight: 400,
+                    color: "#A8A8A8",
+                    letterSpacing: "0.05em",
+                    fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+                  }}
+                >
+                  MCD webs
+                </Typography>
+              </Box>
             </motion.div>
 
             <motion.div
@@ -91,25 +137,29 @@ const Footer = () => {
                 variant="h5"
                 sx={{
                   fontFamily: '"Inter", sans-serif',
-                  color: 'rgba(245, 245, 245, 0.8)',
-                  textAlign: 'center',
+                  color: "rgba(245, 245, 245, 0.8)",
+                  textAlign: "center",
                   mb: 6,
                   fontWeight: 300,
-                  letterSpacing: '0.05em',
-                  fontSize: { xs: '1.2rem', sm: '1.4rem', md: '1.6rem' },
+                  letterSpacing: "0.05em",
+                  fontSize: { xs: "1.2rem", sm: "1.4rem", md: "1.6rem" },
                 }}
               >
-                Let's create something <Box component="span" sx={{ color: '#A8A8A8' }}>exceptional</Box> together
+                Let's create something{" "}
+                <Box component="span" sx={{ color: "#A8A8A8" }}>
+                  exceptional
+                </Box>{" "}
+                together
               </Typography>
             </motion.div>
 
             <Box
               sx={{
-                display: 'flex',
+                display: "flex",
                 gap: 3,
                 mb: 8,
-                flexWrap: 'wrap',
-                justifyContent: 'center',
+                flexWrap: "wrap",
+                justifyContent: "center",
               }}
             >
               {socialLinks.map((social, index) => (
@@ -132,19 +182,19 @@ const Footer = () => {
                     target="_blank"
                     aria-label={social.label}
                     sx={{
-                      color: 'rgba(245, 245, 245, 0.6)',
+                      color: "rgba(245, 245, 245, 0.6)",
                       width: 56,
                       height: 56,
-                      border: '1px solid rgba(168, 168, 168, 0.2)',
+                      border: "1px solid rgba(168, 168, 168, 0.2)",
                       borderRadius: 0,
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        color: '#F5F5F5',
-                        borderColor: '#A8A8A8',
-                        backgroundColor: 'rgba(168, 168, 168, 0.05)',
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        color: "#F5F5F5",
+                        borderColor: "#A8A8A8",
+                        backgroundColor: "rgba(168, 168, 168, 0.05)",
                       },
-                      '& svg': {
-                        fontSize: '1.5rem',
+                      "& svg": {
+                        fontSize: "1.5rem",
                       },
                     }}
                   >
@@ -156,10 +206,10 @@ const Footer = () => {
 
             <Box
               sx={{
-                borderTop: '1px solid rgba(168, 168, 168, 0.1)',
-                width: '100%',
+                borderTop: "1px solid rgba(168, 168, 168, 0.1)",
+                width: "100%",
                 pt: 5,
-                textAlign: 'center',
+                textAlign: "center",
               }}
             >
               <motion.div
@@ -172,10 +222,10 @@ const Footer = () => {
                   variant="body2"
                   sx={{
                     fontFamily: '"Inter", sans-serif',
-                    color: 'rgba(245, 245, 245, 0.4)',
-                    fontSize: '0.85rem',
+                    color: "rgba(245, 245, 245, 0.4)",
+                    fontSize: "0.85rem",
                     fontWeight: 300,
-                    letterSpacing: '0.05em',
+                    letterSpacing: "0.05em",
                   }}
                 >
                   © {new Date().getFullYear()} MCD webs. All rights reserved.
@@ -184,11 +234,11 @@ const Footer = () => {
                   variant="body2"
                   sx={{
                     fontFamily: '"Inter", sans-serif',
-                    color: 'rgba(245, 245, 245, 0.3)',
+                    color: "rgba(245, 245, 245, 0.3)",
                     mt: 1.5,
-                    fontSize: '0.8rem',
+                    fontSize: "0.8rem",
                     fontWeight: 300,
-                    letterSpacing: '0.05em',
+                    letterSpacing: "0.05em",
                   }}
                 >
                   Website Builder & Developer

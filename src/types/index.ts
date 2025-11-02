@@ -14,4 +14,3 @@ export interface Skill {
   icon?: string;
   category?: string;
 }
-
