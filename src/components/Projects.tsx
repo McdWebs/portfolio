@@ -52,14 +52,14 @@ const Projects = () => {
         borderBottom: "1px solid rgba(168, 168, 168, 0.1)",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <Box sx={{ textAlign: "center", mb: 10 }}>
+          <Box sx={{ textAlign: "center", mb: { xs: 6, sm: 8, md: 10 } }}>
             <Typography
               variant="h2"
               sx={{
@@ -75,11 +75,11 @@ const Projects = () => {
             </Typography>
             <Box
               sx={{
-                width: "80px",
+                width: { xs: "60px", sm: "70px", md: "80px" },
                 height: "1px",
                 background: "#A8A8A8",
                 mx: "auto",
-                mb: 3,
+                mb: { xs: 2, sm: 2.5, md: 3 },
               }}
             />
             <Typography
@@ -89,9 +89,10 @@ const Projects = () => {
                 color: "rgba(245, 245, 245, 0.6)",
                 maxWidth: "600px",
                 mx: "auto",
-                fontSize: "1.1rem",
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
                 fontWeight: 300,
                 letterSpacing: "0.01em",
+                px: { xs: 2, sm: 0 },
               }}
             >
               A curated selection of projects showcasing refined craftsmanship
@@ -110,7 +111,7 @@ const Projects = () => {
             sx={{
               display: "grid",
               gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" },
-              gap: { xs: 4, md: 6 },
+              gap: { xs: 3, sm: 4, md: 6 },
             }}
           >
             {projects.map((project) => (
@@ -150,7 +151,7 @@ const Projects = () => {
                   >
                     <Box
                       sx={{
-                        height: 300,
+                        height: { xs: 220, sm: 260, md: 300 },
                         position: "relative",
                         overflow: "hidden",
                         borderBottom: "1px solid rgba(168, 168, 168, 0.1)",
@@ -222,16 +223,16 @@ const Projects = () => {
                       )}
                     </Box>
 
-                    <CardContent sx={{ flexGrow: 1, p: 4 }}>
+                    <CardContent sx={{ flexGrow: 1, p: { xs: 3, sm: 3.5, md: 4 } }}>
                       <Typography
                         variant="body1"
                         sx={{
                           fontFamily: '"Inter", sans-serif',
                           color: "rgba(245, 245, 245, 0.65)",
-                          mb: 3,
+                          mb: { xs: 2.5, sm: 3 },
                           lineHeight: 1.8,
-                          minHeight: "4rem",
-                          fontSize: "1rem",
+                          minHeight: { xs: "3.5rem", sm: "4rem" },
+                          fontSize: { xs: "0.9rem", sm: "0.95rem", md: "1rem" },
                           fontWeight: 300,
                           letterSpacing: "0.01em",
                         }}
@@ -240,7 +241,7 @@ const Projects = () => {
                       </Typography>
                     </CardContent>
 
-                    <CardActions sx={{ p: 4, pt: 0 }}>
+                    <CardActions sx={{ p: { xs: 3, sm: 3.5, md: 4 }, pt: 0 }}>
                       <Button
                         startIcon={<Launch />}
                         variant="outlined"
@@ -252,13 +253,14 @@ const Projects = () => {
                           borderColor: "#A8A8A8",
                           color: "#F5F5F5",
                           borderRadius: 0,
-                          px: 4,
-                          py: 1.5,
-                          fontSize: "0.85rem",
+                          px: { xs: 3, sm: 3.5, md: 4 },
+                          py: { xs: 1.25, sm: 1.375, md: 1.5 },
+                          fontSize: { xs: "0.75rem", sm: "0.8rem", md: "0.85rem" },
                           fontWeight: 400,
                           letterSpacing: "0.1em",
                           textTransform: "uppercase",
                           borderWidth: "1px",
+                          width: { xs: "100%", sm: "auto" },
                           transition: "all 0.3s ease",
                           "&:hover": {
                             borderColor: "#C0C0C0",

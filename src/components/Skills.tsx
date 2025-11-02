@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Grid } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { skills } from "../data/skills";
 import {
@@ -6,12 +6,6 @@ import {
   Web,
   Palette,
   Business,
-  TrendingUp,
-  Speed,
-  ShoppingCart,
-  Analytics,
-  ContentPaste,
-  Brush,
 } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -49,7 +43,7 @@ const Skills = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
   };
@@ -65,14 +59,14 @@ const Skills = () => {
         borderBottom: "1px solid rgba(168, 168, 168, 0.1)",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <Box sx={{ textAlign: "center", mb: 10 }}>
+          <Box sx={{ textAlign: "center", mb: { xs: 6, sm: 8, md: 10 } }}>
             <Typography
               variant="h2"
               sx={{
@@ -88,11 +82,11 @@ const Skills = () => {
             </Typography>
             <Box
               sx={{
-                width: "80px",
+                width: { xs: "60px", sm: "70px", md: "80px" },
                 height: "1px",
                 background: "#A8A8A8",
                 mx: "auto",
-                mb: 3,
+                mb: { xs: 2, sm: 2.5, md: 3 },
               }}
             />
             <Typography
@@ -102,9 +96,10 @@ const Skills = () => {
                 color: "rgba(245, 245, 245, 0.6)",
                 maxWidth: "600px",
                 mx: "auto",
-                fontSize: "1.1rem",
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
                 fontWeight: 300,
                 letterSpacing: "0.01em",
+                px: { xs: 2, sm: 0 },
               }}
             >
               Core capabilities I bring to create exceptional digital
@@ -119,9 +114,15 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          <Grid container spacing={{ xs: 3, md: 4 }}>
-            {skills.map((skill, index) => (
-              <Grid item xs={6} sm={4} md={3} key={skill.id}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "repeat(2, 1fr)", sm: "repeat(3, 1fr)", md: "repeat(5, 1fr)" },
+              gap: { xs: 2, sm: 3, md: 4 },
+            }}
+          >
+            {skills.map((skill) => (
+              <Box key={skill.id}>
                 <motion.div
                   variants={itemVariants}
                   onMouseEnter={() => setHoveredSkill(skill.id)}
@@ -134,7 +135,7 @@ const Skills = () => {
                       flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "center",
-                      p: 4,
+                      p: { xs: 2.5, sm: 3, md: 4 },
                       border: "1px solid rgba(168, 168, 168, 0.1)",
                       background:
                         hoveredSkill === skill.id
@@ -156,7 +157,7 @@ const Skills = () => {
                   >
                     <Box
                       sx={{
-                        mb: 3,
+                        mb: { xs: 2, sm: 2.5, md: 3 },
                         transition: "transform 0.4s ease",
                         transform:
                           hoveredSkill === skill.id ? "scale(1.1)" : "scale(1)",
@@ -174,7 +175,7 @@ const Skills = () => {
                             ? "#F5F5F5"
                             : "rgba(245, 245, 245, 0.8)",
                         textAlign: "center",
-                        fontSize: "0.95rem",
+                        fontSize: { xs: "0.85rem", sm: "0.9rem", md: "0.95rem" },
                         letterSpacing: "0.05em",
                         transition: "color 0.4s ease",
                       }}
@@ -199,9 +200,9 @@ const Skills = () => {
                     )}
                   </Box>
                 </motion.div>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>

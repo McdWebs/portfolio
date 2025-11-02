@@ -55,67 +55,11 @@ const Navigation = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
           alignItems: "center",
           mb: 4,
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Box
-            component="svg"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 100"
-            sx={{
-              width: 32,
-              height: 32,
-              color: "#A8A8A8",
-            }}
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="48"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-            <g
-              stroke="currentColor"
-              strokeWidth="2"
-              fill="none"
-              strokeLinecap="round"
-            >
-              <circle cx="50" cy="50" r="6" fill="currentColor" />
-              <line x1="50" y1="44" x2="50" y2="30" />
-              <circle cx="50" cy="24" r="6" fill="currentColor" />
-              <line x1="56" y1="50" x2="70" y2="50" />
-              <circle cx="76" cy="50" r="6" fill="currentColor" />
-              <line x1="50" y1="56" x2="50" y2="70" />
-              <circle cx="50" cy="76" r="6" fill="currentColor" />
-              <line x1="44" y1="50" x2="30" y2="50" />
-              <circle cx="24" cy="50" r="6" fill="currentColor" />
-              <line x1="56" y1="44" x2="68" y2="32" />
-              <circle cx="72" cy="28" r="5" fill="currentColor" />
-              <line x1="44" y1="56" x2="32" y2="68" />
-              <circle cx="28" cy="72" r="5" fill="currentColor" />
-              <line x1="56" y1="56" x2="68" y2="68" />
-              <circle cx="72" cy="72" r="5" fill="currentColor" />
-              <line x1="44" y1="44" x2="32" y2="32" />
-              <circle cx="28" cy="28" r="5" fill="currentColor" />
-            </g>
-          </Box>
-          <Typography
-            variant="h6"
-            sx={{
-              fontFamily: '"Playfair Display", serif',
-              fontWeight: 700,
-              color: "#A8A8A8",
-              letterSpacing: "0.05em",
-            }}
-          >
-            MCD webs
-          </Typography>
-        </Box>
         <IconButton
           onClick={() => setMobileOpen(false)}
           sx={{ color: "#F5F5F5" }}
@@ -191,19 +135,20 @@ const Navigation = () => {
           <Toolbar
             sx={{
               justifyContent: "space-between",
-              py: 2,
-              minHeight: "80px !important",
+              py: { xs: 1.5, sm: 2 },
+              minHeight: { xs: "70px !important", sm: "80px !important" },
             }}
           >
-            <motion.div
+            <Box
+              component={motion.div}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => scrollToSection("hero")}
-              style={{
+              sx={{
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
-                gap: "12px",
+                gap: { xs: 1, sm: 1.25, md: 1.5 },
               }}
             >
               <Box
@@ -211,9 +156,10 @@ const Navigation = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 100 100"
                 sx={{
-                  width: { xs: 32, sm: 40 },
-                  height: { xs: 32, sm: 40 },
+                  width: { xs: 28, sm: 32, md: 40 },
+                  height: { xs: 28, sm: 32, md: 40 },
                   color: "#A8A8A8",
+                  flexShrink: 0,
                 }}
               >
                 <circle
@@ -261,7 +207,7 @@ const Navigation = () => {
               >
                 MCD webs
               </Typography>
-            </motion.div>
+            </Box>
 
             {isMobile ? (
               <IconButton
@@ -277,7 +223,7 @@ const Navigation = () => {
                 <MenuIcon />
               </IconButton>
             ) : (
-              <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
+              <Box sx={{ display: "flex", gap: { xs: 2, sm: 3, md: 4 }, alignItems: "center" }}>
                 {navItems.map((item) => (
                   <motion.div
                     key={item.id}
@@ -289,7 +235,7 @@ const Navigation = () => {
                       sx={{
                         fontFamily: '"Inter", sans-serif',
                         fontWeight: 400,
-                        fontSize: "0.85rem",
+                        fontSize: { xs: "0.75rem", sm: "0.8rem", md: "0.85rem" },
                         letterSpacing: "0.15em",
                         textTransform: "uppercase",
                         color: "#F5F5F5",

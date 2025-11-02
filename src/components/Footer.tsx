@@ -24,7 +24,7 @@ const Footer = () => {
         borderTop: "1px solid rgba(168, 168, 168, 0.1)",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ const Footer = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 6,
+              gap: { xs: 4, sm: 5, md: 6 },
             }}
           >
             <motion.div
@@ -50,8 +50,9 @@ const Footer = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: "16px",
-                  mb: 4,
+                  gap: { xs: "12px", sm: "14px", md: "16px" },
+                  mb: { xs: 3, sm: 3.5, md: 4 },
+                  flexDirection: { xs: "column", sm: "row" },
                   position: "relative",
                   "&::after": {
                     content: '""',
@@ -74,8 +75,8 @@ const Footer = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 100 100"
                   sx={{
-                    width: { xs: 48, sm: 56, md: 64 },
-                    height: { xs: 48, sm: 56, md: 64 },
+                    width: { xs: 40, sm: 48, md: 64 },
+                    height: { xs: 40, sm: 48, md: 64 },
                     color: "#A8A8A8",
                   }}
                 >
@@ -156,8 +157,8 @@ const Footer = () => {
             <Box
               sx={{
                 display: "flex",
-                gap: 3,
-                mb: 8,
+                gap: { xs: 2, sm: 2.5, md: 3 },
+                mb: { xs: 6, sm: 7, md: 8 },
                 flexWrap: "wrap",
                 justifyContent: "center",
               }}
@@ -183,8 +184,8 @@ const Footer = () => {
                     aria-label={social.label}
                     sx={{
                       color: "rgba(245, 245, 245, 0.6)",
-                      width: 56,
-                      height: 56,
+                      width: { xs: 48, sm: 52, md: 56 },
+                      height: { xs: 48, sm: 52, md: 56 },
                       border: "1px solid rgba(168, 168, 168, 0.2)",
                       borderRadius: 0,
                       transition: "all 0.3s ease",
@@ -194,7 +195,7 @@ const Footer = () => {
                         backgroundColor: "rgba(168, 168, 168, 0.05)",
                       },
                       "& svg": {
-                        fontSize: "1.5rem",
+                        fontSize: { xs: "1.25rem", sm: "1.375rem", md: "1.5rem" },
                       },
                     }}
                   >

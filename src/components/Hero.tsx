@@ -87,7 +87,7 @@ const Hero = () => {
         }}
       />
 
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -151,11 +151,11 @@ const Hero = () => {
           >
             <Box
               sx={{
-                width: "120px",
+                width: { xs: "80px", sm: "100px", md: "120px" },
                 height: "1px",
                 background: "#A8A8A8",
                 mx: "auto",
-                mb: 4,
+                mb: { xs: 3, sm: 3.5, md: 4 },
               }}
             />
           </motion.div>
@@ -179,16 +179,16 @@ const Hero = () => {
 
           <motion.div
             variants={itemVariants}
-            style={{ width: "100%", maxWidth: "600px" }}
+            style={{ width: "100%", maxWidth: "600px", padding: "0 16px" }}
           >
             <Typography
               variant="body1"
               sx={{
                 fontFamily: '"Inter", sans-serif',
-                fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
+                fontSize: { xs: "0.95rem", sm: "1.1rem", md: "1.2rem" },
                 fontWeight: 300,
                 color: "rgba(245, 245, 245, 0.6)",
-                mb: 6,
+                mb: { xs: 4, sm: 5, md: 6 },
                 lineHeight: 1.8,
                 letterSpacing: "0.01em",
               }}
@@ -208,15 +208,17 @@ const Hero = () => {
                 sx={{
                   borderColor: "#A8A8A8",
                   color: "#F5F5F5",
-                  px: 6,
-                  py: 2,
-                  fontSize: "0.85rem",
+                  px: { xs: 4, sm: 5, md: 6 },
+                  py: { xs: 1.5, sm: 1.75, md: 2 },
+                  fontSize: { xs: "0.75rem", sm: "0.8rem", md: "0.85rem" },
                   fontWeight: 400,
                   letterSpacing: "0.15em",
                   textTransform: "uppercase",
                   borderRadius: 0,
                   borderWidth: "1px",
                   transition: "all 0.3s ease",
+                  width: { xs: "100%", sm: "auto" },
+                  maxWidth: { xs: "280px", sm: "none" },
                   "&:hover": {
                     borderColor: "#C0C0C0",
                     backgroundColor: "rgba(168, 168, 168, 0.05)",
