@@ -1,15 +1,8 @@
-import { Box, Container, Typography, IconButton, Link } from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
-import { Email, LinkedIn, GitHub, Twitter } from "@mui/icons-material";
+import { Email } from "@mui/icons-material";
 
 const Footer = () => {
-  const socialLinks = [
-    { icon: <Email />, url: "#", label: "Email" },
-    { icon: <LinkedIn />, url: "#", label: "LinkedIn" },
-    { icon: <GitHub />, url: "#", label: "GitHub" },
-    { icon: <Twitter />, url: "#", label: "Twitter" },
-  ];
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -140,7 +133,7 @@ const Footer = () => {
                   fontFamily: '"Inter", sans-serif',
                   color: "rgba(245, 245, 245, 0.8)",
                   textAlign: "center",
-                  mb: 6,
+                  mb: { xs: 4, sm: 5, md: 6 },
                   fontWeight: 300,
                   letterSpacing: "0.05em",
                   fontSize: { xs: "1.2rem", sm: "1.4rem", md: "1.6rem" },
@@ -154,56 +147,46 @@ const Footer = () => {
               </Typography>
             </motion.div>
 
-            <Box
-              sx={{
-                display: "flex",
-                gap: { xs: 2, sm: 2.5, md: 3 },
-                mb: { xs: 6, sm: 7, md: 8 },
-                flexWrap: "wrap",
-                justifyContent: "center",
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94],
               }}
             >
-              {socialLinks.map((social, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <IconButton
-                    component={Link}
-                    href={social.url}
-                    target="_blank"
-                    aria-label={social.label}
-                    sx={{
-                      color: "rgba(245, 245, 245, 0.6)",
-                      width: { xs: 48, sm: 52, md: 56 },
-                      height: { xs: 48, sm: 52, md: 56 },
-                      border: "1px solid rgba(168, 168, 168, 0.2)",
-                      borderRadius: 0,
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        color: "#F5F5F5",
-                        borderColor: "#A8A8A8",
-                        backgroundColor: "rgba(168, 168, 168, 0.05)",
-                      },
-                      "& svg": {
-                        fontSize: { xs: "1.25rem", sm: "1.375rem", md: "1.5rem" },
-                      },
-                    }}
-                  >
-                    {social.icon}
-                  </IconButton>
-                </motion.div>
-              ))}
-            </Box>
+              <Button
+                component="a"
+                href="mailto:mcdwebs4135@gmail.com"
+                startIcon={<Email />}
+                variant="outlined"
+                sx={{
+                  borderColor: "#A8A8A8",
+                  color: "#F5F5F5",
+                  borderRadius: 0,
+                  px: { xs: 4, sm: 5, md: 6 },
+                  py: { xs: 1.5, sm: 1.75, md: 2 },
+                  fontSize: { xs: "0.85rem", sm: "0.9rem", md: "0.95rem" },
+                  fontWeight: 400,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  borderWidth: "1px",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    borderColor: "#C0C0C0",
+                    backgroundColor: "rgba(168, 168, 168, 0.05)",
+                    transform: "translateY(-2px)",
+                  },
+                  "& svg": {
+                    fontSize: { xs: "1.25rem", sm: "1.375rem", md: "1.5rem" },
+                  },
+                }}
+              >
+                Contact us
+              </Button>
+            </motion.div>
 
             <Box
               sx={{
