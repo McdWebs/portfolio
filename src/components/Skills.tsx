@@ -3,27 +3,43 @@ import { motion } from "framer-motion";
 import { skills } from "../data/skills";
 import {
   Code,
-  Web,
   Palette,
-  Business,
+  Psychology,
+  Devices,
+  Speed,
+  Style,
+  ShoppingCart,
+  Description,
+  Search,
+  Analytics,
+  SmartToy,
+  AutoAwesome,
 } from "@mui/icons-material";
+import type { Skill } from "../types";
 import { useState } from "react";
+
+const iconMap = {
+  Code,
+  Palette,
+  Psychology,
+  Devices,
+  Speed,
+  Style,
+  ShoppingCart,
+  Description,
+  Search,
+  Analytics,
+  SmartToy,
+  AutoAwesome,
+} as const;
 
 const Skills = () => {
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
 
-  const getIcon = (category?: string) => {
+  const getIcon = (skill: Skill) => {
     const iconStyle = { fontSize: 32, color: "#A8A8A8" };
-    switch (category) {
-      case "Development":
-        return <Code sx={iconStyle} />;
-      case "Design":
-        return <Palette sx={iconStyle} />;
-      case "Business":
-        return <Business sx={iconStyle} />;
-      default:
-        return <Web sx={iconStyle} />;
-    }
+    const IconComponent = skill.icon ? iconMap[skill.icon as keyof typeof iconMap] : Code;
+    return IconComponent ? <IconComponent sx={iconStyle} /> : null;
   };
 
   const containerVariants = {
@@ -119,6 +135,8 @@ const Skills = () => {
               display: "grid",
               gridTemplateColumns: { xs: "repeat(2, 1fr)", sm: "repeat(3, 1fr)", md: "repeat(5, 1fr)" },
               gap: { xs: 2, sm: 3, md: 4 },
+              alignItems: "stretch",
+              gridAutoRows: "1fr",
             }}
           >
             {skills.map((skill) => (
@@ -130,6 +148,7 @@ const Skills = () => {
                 >
                   <Box
                     sx={{
+                      minHeight: { xs: 140, sm: 150, md: 170 },
                       height: "100%",
                       display: "flex",
                       flexDirection: "column",
@@ -163,7 +182,7 @@ const Skills = () => {
                           hoveredSkill === skill.id ? "scale(1.1)" : "scale(1)",
                       }}
                     >
-                      {getIcon(skill.category)}
+                      {getIcon(skill)}
                     </Box>
                     <Typography
                       variant="h6"

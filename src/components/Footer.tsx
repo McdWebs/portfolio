@@ -1,10 +1,59 @@
-import { Box, Container, Typography, Button } from "@mui/material";
+import { Box, Container, Typography, Button, TextField, Alert } from "@mui/material";
 import { motion } from "framer-motion";
 import { Email } from "@mui/icons-material";
+import { useState } from "react";
+
+const DEFAULT_MESSAGE =
+  "Hi, I’m interested in working with you on a new project. Here are a few details about what I need:";
 
 const Footer = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState(DEFAULT_MESSAGE);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setSuccessMessage(null);
+    setErrorMessage(null);
+
+    if (!email || !message) {
+      setErrorMessage("Please provide at least your email and a message.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("http://localhost:4000/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      setSuccessMessage("Thank you! Your message has been sent.");
+      setName("");
+      setEmail("");
+      setMessage(DEFAULT_MESSAGE);
+    } catch (error) {
+      setErrorMessage("Failed to send your message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -156,36 +205,111 @@ const Footer = () => {
                 delay: 0.3,
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
+              style={{ width: "100%" }}
             >
-              <Button
-                component="a"
-                href="mailto:mcdwebs4135@gmail.com"
-                startIcon={<Email />}
-                variant="outlined"
+              <Box
+                component="form"
+                onSubmit={handleSubmit}
                 sx={{
-                  borderColor: "#A8A8A8",
-                  color: "#F5F5F5",
-                  borderRadius: 0,
-                  px: { xs: 4, sm: 5, md: 6 },
-                  py: { xs: 1.5, sm: 1.75, md: 2 },
-                  fontSize: { xs: "0.85rem", sm: "0.9rem", md: "0.95rem" },
-                  fontWeight: 400,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  borderWidth: "1px",
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    borderColor: "#C0C0C0",
-                    backgroundColor: "rgba(168, 168, 168, 0.05)",
-                    transform: "translateY(-2px)",
-                  },
-                  "& svg": {
-                    fontSize: { xs: "1.25rem", sm: "1.375rem", md: "1.5rem" },
-                  },
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: { xs: 2, sm: 2.5, md: 3 },
+                  maxWidth: 480,
+                  mx: "auto",
                 }}
               >
-                Contact us
-              </Button>
+                <TextField
+                  label="Name"
+                  variant="outlined"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  fullWidth
+                  InputLabelProps={{ sx: { color: "rgba(245, 245, 245, 0.6)" } }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      color: "#F5F5F5",
+                      "& fieldset": { borderColor: "rgba(168, 168, 168, 0.3)" },
+                      "&:hover fieldset": { borderColor: "#A8A8A8" },
+                    },
+                  }}
+                />
+                <TextField
+                  label="Email"
+                  type="email"
+                  required
+                  variant="outlined"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  fullWidth
+                  InputLabelProps={{ sx: { color: "rgba(245, 245, 245, 0.6)" } }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      color: "#F5F5F5",
+                      "& fieldset": { borderColor: "rgba(168, 168, 168, 0.3)" },
+                      "&:hover fieldset": { borderColor: "#A8A8A8" },
+                    },
+                  }}
+                />
+                <TextField
+                  label="Message"
+                  required
+                  multiline
+                  minRows={4}
+                  variant="outlined"
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  fullWidth
+                  InputLabelProps={{ sx: { color: "rgba(245, 245, 245, 0.6)" } }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      color: "#F5F5F5",
+                      "& fieldset": { borderColor: "rgba(168, 168, 168, 0.3)" },
+                      "&:hover fieldset": { borderColor: "#A8A8A8" },
+                    },
+                  }}
+                />
+
+                {errorMessage && (
+                  <Alert severity="error" sx={{ backgroundColor: "rgba(255, 0, 0, 0.08)" }}>
+                    {errorMessage}
+                  </Alert>
+                )}
+                {successMessage && (
+                  <Alert severity="success" sx={{ backgroundColor: "rgba(0, 255, 0, 0.08)" }}>
+                    {successMessage}
+                  </Alert>
+                )}
+
+                <Button
+                  type="submit"
+                  startIcon={<Email />}
+                  variant="outlined"
+                  disabled={isSubmitting}
+                  sx={{
+                    borderColor: "#A8A8A8",
+                    color: "#F5F5F5",
+                    borderRadius: 0,
+                    px: { xs: 4, sm: 5, md: 6 },
+                    py: { xs: 1.5, sm: 1.75, md: 2 },
+                    fontSize: { xs: "0.85rem", sm: "0.9rem", md: "0.95rem" },
+                    fontWeight: 400,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    borderWidth: "1px",
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      borderColor: "#C0C0C0",
+                      backgroundColor: "rgba(168, 168, 168, 0.05)",
+                      transform: "translateY(-2px)",
+                    },
+                    "& svg": {
+                      fontSize: { xs: "1.25rem", sm: "1.375rem", md: "1.5rem" },
+                    },
+                  }}
+                >
+                  {isSubmitting ? "Sending..." : "Send message"}
+                </Button>
+              </Box>
             </motion.div>
 
             <Box
