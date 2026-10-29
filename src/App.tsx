@@ -16,15 +16,6 @@ type Work = {
 const works: Work[] = [
   {
     id: "01",
-    title: "Netanel Levinstein",
-    category: "Photography",
-    blurb:
-      "A portfolio for a photographer who sells feeling, not files. The site gets out of the way so the frames do the talking.",
-    image: "/work/netanel.jpg",
-    url: "https://www.netanelewen.com/Home?lang=en",
-  },
-  {
-    id: "02",
     title: "Fernwood Bakery",
     category: "Food / Local business",
     blurb:
@@ -33,7 +24,7 @@ const works: Work[] = [
     url: "/fernwood/",
   },
   {
-    id: "03",
+    id: "02",
     title: "Ledgerly",
     category: "SaaS / Fintech",
     blurb:
@@ -42,7 +33,7 @@ const works: Work[] = [
     url: "/ledgerly/",
   },
   {
-    id: "04",
+    id: "03",
     title: "Rook Electric",
     category: "E-commerce / Brand",
     blurb:
@@ -51,13 +42,22 @@ const works: Work[] = [
     url: "/rook/",
   },
   {
-    id: "05",
+    id: "04",
     title: "Maré",
     category: "Hospitality / Travel",
     blurb:
       "A photography-led site for a coastal retreat, with a slow word-by-word intro, a draggable room carousel and a live stay estimator.",
     image: "/work/mare.jpg",
     url: "/mare/",
+  },
+  {
+    id: "05",
+    title: "Netanel Levinstein",
+    category: "Photography",
+    blurb:
+      "A portfolio for a photographer who sells feeling, not files. The site gets out of the way so the frames do the talking.",
+    image: "/work/netanel.jpg",
+    url: "https://www.netanelewen.com/Home?lang=en",
   },
   {
     id: "06",
