@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const EMAIL = "mcdwebs4135@gmail.com";
+const WA_NUMBER = "972543644512";
+const WA_URL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
+  "Hi, I found your portfolio and I’d like to talk about a project."
+)}`;
 const DEFAULT_MESSAGE =
   "Hi, I’m interested in working with you on a new project. Here are a few details about what I need:";
 
@@ -259,10 +263,7 @@ function Reel() {
         <div className="grain" aria-hidden="true" />
         <div className="reel-shade" aria-hidden="true" />
         <div className="hud hud-top">
-          <span className="rec">
-            <i /> REEL
-          </span>
-          <span className="mono">
+          <span className="mono" style={{ marginLeft: "auto" }}>
             {works[i].id} / 0{works.length}
           </span>
         </div>
@@ -300,7 +301,11 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="wrap hero-copy">
-        <p className="pill mono">Web design &amp; development studio</p>
+        <p className="kicker mono">
+          <span className="kicker-rule" aria-hidden="true" />
+          Web design &amp; development studio
+          <span className="kicker-rule r" aria-hidden="true" />
+        </p>
         <h1>
           Websites with a <em>cinematic</em> pulse.
         </h1>
@@ -308,14 +313,6 @@ function Hero() {
           I’m Michael, the one-person studio behind MCD Webs. I design, build and
           automate sites that feel like a product launch, not a template.
         </p>
-        <div className="hero-actions">
-          <a href="#contact" className="btn btn-light">
-            Start a project
-          </a>
-          <a href="#work" className="btn btn-glass">
-            Watch the reel ↓
-          </a>
-        </div>
       </div>
       <div className="wrap wide">
         <Reel />
@@ -499,9 +496,17 @@ function Contact() {
               Tell me what you’re building. I’ll reply with ideas, not a sales
               script.
             </p>
-            <a className="mail" href={`mailto:${EMAIL}`}>
-              {EMAIL}
-            </a>
+            <div className="reach">
+              <a className="btn btn-wa" href={WA_URL} target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor">
+                  <path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.27-1.38A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.2 8.2 0 1 1 6.97 3.86Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.09-.39-.12-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.3-2.88c-.25-.43.25-.4.72-1.33.08-.16.04-.3-.02-.42-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.9 2.4 1.02 2.57c.12.16 1.75 2.67 4.24 3.75 1.58.68 2.2.74 2.99.62.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z" />
+                </svg>
+                Chat on WhatsApp
+              </a>
+              <a className="mail" href={`mailto:${EMAIL}`}>
+                {EMAIL}
+              </a>
+            </div>
           </div>
           <form className="form" onSubmit={submit} noValidate>
             <label>

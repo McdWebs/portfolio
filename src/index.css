@@ -109,7 +109,6 @@ em { font-family: var(--font-display); font-style: italic; font-weight: 400; }
 /* hero */
 .hero { padding-top: var(--s8); }
 .hero-copy { display: grid; justify-items: center; text-align: center; gap: var(--s5); margin-bottom: var(--s8); }
-.pill { padding: var(--s2) var(--s4); border: 1px solid var(--line); border-radius: var(--r-pill); color: var(--muted); }
 h1 { font-size: clamp(48px, 9vw, 128px); font-weight: 400; line-height: 0.95; letter-spacing: -0.045em; max-width: 12ch; text-wrap: balance; }
 .hero-actions { display: flex; gap: var(--s3); flex-wrap: wrap; justify-content: center; margin-top: var(--s2); }
 .hero-copy > * { animation: rise 1s var(--ease) both; }
@@ -260,3 +259,34 @@ h1 { font-size: clamp(48px, 9vw, 128px); font-weight: 400; line-height: 0.95; le
 .next-media em { color: var(--accent); }
 .card:hover .next-media span { transform: scale(1.05); }
 @media (max-width: 720px) { .reel-ticks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.reach { display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; margin-top: var(--s5); }
+.reach .mail { margin-top: 0; }
+.btn-wa { background: #25d366; color: #06210f; }
+.btn-wa:hover { transform: translateY(-2px); filter: brightness(1.06); }
+
+/* hero kicker: hairlines draw outward from the text */
+.kicker { display: flex; align-items: center; gap: var(--s4); color: var(--muted); letter-spacing: 0.2em; font-size: 12px; }
+.kicker-rule { width: clamp(28px, 9vw, 112px); height: 1px; background: linear-gradient(90deg, transparent, var(--accent)); transform-origin: right; animation: rule 1.4s 0.4s var(--ease) both; }
+.kicker-rule.r { background: linear-gradient(270deg, transparent, var(--accent)); transform-origin: left; }
+@keyframes rule { from { transform: scaleX(0); } }
+
+/* mobile: keep the stacking-card effect, and make the reel indicator a compact segmented bar */
+@media (max-width: 720px) {
+  .layer { position: sticky; top: calc(92px + var(--k) * 16px); min-height: 250px; padding: var(--s5); }
+  .stackcards { padding-bottom: var(--s6); }
+
+  .reel { aspect-ratio: 5 / 4; }
+  .reel-shade { background: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 22%, transparent 38%, rgba(0,0,0,0.92)); }
+  .reel-img > img { object-position: 28% top; }
+  .reel .hud { left: var(--s4); right: var(--s4); }
+  .reel .hud-top { top: var(--s4); }
+  .reel .hud-bottom { bottom: var(--s4); flex-direction: row; align-items: flex-end; }
+  .reel-title { font-size: 26px; margin-top: 4px; }
+  .reel .hud-bottom .mono { font-size: 10px; }
+
+  .reel-ticks { display: flex; gap: 6px; margin-top: var(--s3); }
+  .tick { position: relative; flex: 1; padding: 18px 0; min-height: 44px; }
+  .tick-bar { height: 3px; }
+  .tick-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
