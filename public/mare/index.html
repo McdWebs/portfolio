@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maré — A small house above the sea</title>
+<meta name="description" content="Maré is a twelve-room retreat above a quiet bay. Slow mornings, salt air, nothing scheduled.">
+<meta name="theme-color" content="#1f4a5c">
+<link rel="icon" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#f7f3ec;--sand:#ece3d3;--sea:#1f4a5c;--mist:#d4e2e4;--ink:#17262c;--line:rgba(23,38,44,.16);--ease:cubic-bezier(.22,1,.36,1);--s:clamp(20px,5vw,72px)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:var(--bone);color:var(--ink);font:300 17px/1.7 Jost,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sea);outline-offset:4px}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+.cap{font:400 12px Jost;letter-spacing:.28em;text-transform:uppercase}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:300;letter-spacing:-.01em;line-height:1}
+em{font-style:italic}
+.link{display:inline-flex;gap:12px;align-items:center;font:400 12px Jost;letter-spacing:.24em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid currentColor;transition:gap .4s var(--ease)}.link:hover{gap:20px}
+
+/* nav */
+nav.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:26px var(--s);color:#fff;transition:color .5s,background .5s,padding .5s}
+nav.top.solid{color:var(--ink);background:rgba(247,243,236,.88);backdrop-filter:blur(14px);padding-block:16px}
+nav.top .logo{font:300 34px "Cormorant Garamond",serif;letter-spacing:.04em}
+nav.top .r{display:flex;gap:36px;align-items:center}nav.top .r a.l{display:none}
+@media(min-width:800px){nav.top .r a.l{display:inline;font:400 12px Jost;letter-spacing:.24em;text-transform:uppercase;opacity:.85}nav.top .r a.l:hover{opacity:1}}
+nav.top .res{font:400 12px Jost;letter-spacing:.24em;text-transform:uppercase;padding:12px 22px;border:1px solid currentColor;border-radius:99px;transition:background .3s,color .3s}nav.top .res:hover{background:#fff;color:var(--sea)}nav.top.solid .res:hover{background:var(--sea);color:#fff;border-color:var(--sea)}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:640px;color:#fff;overflow:hidden;display:grid;place-items:center;text-align:center}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:drift 24s ease-in-out infinite alternate;transform-origin:60% 50%}
+@keyframes drift{to{transform:scale(1.12) translate(-1.5%,-1%)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,40,.35),rgba(8,30,40,.05) 35%,rgba(8,30,40,.45))}
+.hero .in{position:relative;z-index:2;padding:0 20px;animation:fade 2s .2s var(--ease) both}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}}
+.hero h1{font-size:clamp(88px,19vw,300px);font-weight:300;letter-spacing:.06em;margin-right:-.06em;line-height:.85}
+.hero p.cap{margin-top:28px;opacity:.9}
+.scroll{position:absolute;left:50%;bottom:130px;translate:-50% 0;z-index:2;width:1px;height:56px;background:rgba(255,255,255,.4);overflow:hidden}.scroll::after{content:"";position:absolute;left:0;top:-100%;width:1px;height:100%;background:#fff;animation:sc 2.4s ease-in-out infinite}@keyframes sc{to{top:100%}}
+
+/* booking bar */
+.bar{position:absolute;z-index:5;left:50%;bottom:32px;translate:-50% 0;width:min(920px,calc(100% - 2*var(--s)));display:grid;grid-template-columns:1.1fr 1.1fr .8fr auto;background:rgba(247,243,236,.92);backdrop-filter:blur(16px);color:var(--ink);border-radius:99px;padding:8px 8px 8px 12px;text-align:left;box-shadow:0 20px 60px rgba(8,30,40,.3)}
+.bar label{display:grid;padding:8px 22px;border-right:1px solid var(--line);cursor:pointer}.bar label:nth-child(3){border-right:0}
+.bar label span{font:400 10px Jost;letter-spacing:.24em;text-transform:uppercase;opacity:.6}
+.bar input,.bar select{border:0;background:none;font:400 16px Jost;padding:2px 0;min-width:0;cursor:pointer}.bar input:focus,.bar select:focus{outline:none}
+.bar button{border:0;background:var(--sea);color:#fff;border-radius:99px;padding:0 32px;font:400 12px Jost;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:background .3s}.bar button:hover{background:#14394a}
+
+section{padding:clamp(80px,12vw,180px) var(--s)}
+/* statement */
+.state{max-width:1100px;margin-inline:auto;text-align:center}
+.state .cap{display:block;margin-bottom:40px;opacity:.6}
+.words{font:300 clamp(34px,5.4vw,76px)/1.12 "Cormorant Garamond",serif;letter-spacing:-.015em}
+.words span{opacity:.14;transition:opacity .5s}.words span.on{opacity:1}
+
+/* pair */
+.pair{display:grid;grid-template-columns:5fr 6fr;gap:clamp(32px,7vw,100px);align-items:center;background:var(--sand);padding-block:clamp(56px,7vw,100px)}
+.pair .imgs{position:relative;padding-bottom:12%;max-width:460px}
+.pair .a{width:76%;height:auto;aspect-ratio:4/5;max-height:440px;object-fit:cover;border-radius:999px 999px 0 0}
+.pair .b{position:absolute;right:0;bottom:0;width:42%;height:auto;aspect-ratio:1/1.1;object-fit:cover;border:10px solid var(--sand);will-change:transform}
+.pair h2{font-size:clamp(40px,4.6vw,72px);margin:16px 0 20px}.pair p{max-width:40ch;opacity:.85;margin-bottom:28px}
+.facts{display:flex;gap:clamp(24px,4vw,56px);margin-bottom:30px;flex-wrap:wrap}.facts div b{display:block;font:300 clamp(36px,4vw,56px)/1 "Cormorant Garamond",serif}.facts div span{font:400 11px Jost;letter-spacing:.22em;text-transform:uppercase;opacity:.6}
+
+/* rooms */
+.rooms{padding-inline:0}
+.rooms .head{display:flex;justify-content:space-between;align-items:end;gap:24px;padding-inline:var(--s);margin-bottom:56px;flex-wrap:wrap}
+.rooms h2{font-size:clamp(44px,6vw,92px)}
+.arrows{display:flex;gap:12px}.arrows button{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;font-size:20px;transition:.3s}.arrows button:hover{background:var(--sea);color:#fff;border-color:var(--sea)}
+.track{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--s) 12px;scrollbar-width:none;cursor:grab}.track::-webkit-scrollbar{display:none}
+.room{flex:0 0 min(520px,82vw);scroll-snap-align:start}
+.room .ph{aspect-ratio:4/5;overflow:hidden;border-radius:240px 240px 0 0;background:var(--mist)}.room .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease);user-select:none;-webkit-user-drag:none}.room:hover .ph img{transform:scale(1.06)}
+.room .meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:24px;gap:16px}.room h3{font-size:clamp(32px,3.4vw,46px)}.room .pr{font:400 14px Jost;letter-spacing:.08em;white-space:nowrap}
+.room p{opacity:.7;margin:10px 0 20px;max-width:38ch;font-size:16px}
+
+/* days */
+.days{background:var(--sea);color:#fff;padding:0}
+.days .grid{display:grid;grid-template-columns:1fr 1fr}
+.days .sticky{position:sticky;top:0;height:100svh;overflow:hidden}
+.days .sticky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s var(--ease),transform 8s linear;transform:scale(1.06)}.days .sticky img.on{opacity:1;transform:scale(1)}
+.days .step{min-height:100svh;display:grid;align-content:center;padding:var(--s);gap:20px}
+.days .step .n{font:300 clamp(72px,10vw,150px)/.9 "Cormorant Garamond",serif;opacity:.25}
+.days .step h3{font-size:clamp(44px,5vw,76px)}.days .step p{max-width:36ch;opacity:.85}
+.days .step img{display:none}
+
+/* reserve */
+.reserve{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0;background:var(--bone)}
+.reserve .ph{position:relative;min-height:640px}.reserve .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reserve .fm{padding:clamp(40px,7vw,110px) var(--s);display:grid;gap:28px;align-content:center}
+.reserve h2{font-size:clamp(44px,5.4vw,84px)}
+.opts{display:grid;gap:14px}.opt{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;border:1px solid var(--line);border-radius:999px;background:none;cursor:pointer;text-align:left;transition:.35s var(--ease)}
+.opt:hover{border-color:var(--sea)}.opt[aria-pressed=true]{background:var(--sea);color:#fff;border-color:var(--sea)}.opt b{font:400 24px "Cormorant Garamond",serif}.opt span{font-size:14px;opacity:.8}
+.row{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.step2{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:99px}.step2 button{width:48px;height:48px;border:0;background:none;font-size:20px;cursor:pointer;border-radius:50%}.step2 button:hover{background:var(--mist)}.step2 output{min-width:90px;text-align:center}
+.sum{border-top:1px solid var(--line);padding-top:24px;display:grid;gap:8px}.sum div{display:flex;justify-content:space-between;font-size:15px;opacity:.8}.sum .t{opacity:1;font:300 clamp(40px,4.6vw,64px)/1 "Cormorant Garamond",serif;align-items:baseline;margin-top:8px}.sum .t span:first-child{font:400 12px Jost;letter-spacing:.24em;text-transform:uppercase}
+.go{border:0;background:var(--sea);color:#fff;border-radius:99px;padding:20px 40px;font:400 12px Jost;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:background .3s,transform .3s;justify-self:start}.go:hover{background:#14394a;transform:translateY(-2px)}.go:disabled{opacity:.6}
+.note{min-height:26px;font-size:14px;opacity:.8}
+
+footer{background:var(--sand);padding:clamp(56px,8vw,110px) var(--s) 32px;overflow:hidden}
+footer .big{font:300 clamp(120px,32vw,520px)/.78 "Cormorant Garamond",serif;letter-spacing:.04em;color:var(--sea);text-align:center;margin-bottom:48px}
+footer .cols{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:14px;border-top:1px solid var(--line);padding-top:28px}footer a:hover{text-decoration:underline}
+
+.fade{opacity:0;transform:translateY(32px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}.fade.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .bar{grid-template-columns:1fr 1fr;border-radius:28px;bottom:20px}.bar label:nth-child(2){border-right:0}.bar label{border-bottom:1px solid var(--line)}.bar label:nth-child(3){border-bottom:0;border-right:1px solid var(--line)}.bar button{padding:14px}.bar button{border-radius:20px;margin:6px}
+  .scroll{display:none}.pair,.reserve{grid-template-columns:1fr}.pair .imgs{max-width:420px}
+  .days .grid{grid-template-columns:1fr}.days .sticky{display:none}.days .step{min-height:0;padding-block:64px}.days .step img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;margin-bottom:12px;border-radius:200px 200px 0 0}
+  .reserve .ph{min-height:420px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.fade{opacity:1;transform:none}.words span{opacity:1}}
+</style></head><body>
+<nav class="top" id="nav"><a class="logo" href="#top">Maré</a><div class="r"><a class="l" href="#house">The house</a><a class="l" href="#rooms">Rooms</a><a class="l" href="#days">Days</a><a class="res" href="#reserve">Reserve</a></div></nav>
+<main id="top">
+<header class="hero"><img src="img/hero.jpg" width="2200" height="1649" alt="Aerial view of waves washing onto pale sand" fetchpriority="high">
+  <div class="in"><h1>Maré</h1><p class="cap">A small house above the sea</p></div><div class="scroll" aria-hidden="true"></div>
+  <form class="bar" id="bar"><label><span>Arrive</span><input type="date" id="in" required></label><label><span>Depart</span><input type="date" id="out" required></label><label><span>Guests</span><select id="gs"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4 guests</option></select></label><button type="submit">Check availability</button></form>
+</header>
+
+<section class="state" id="house"><span class="cap">Welcome</span><p class="words" id="words">Twelve rooms above a quiet bay. Salt on the windows, linen on the beds, and nothing at all on the schedule. Come to do less, and stay until it feels like enough.</p></section>
+
+<section class="pair"><div class="imgs fade"><img class="a" src="img/shore.jpg" width="1400" height="2492" loading="lazy" alt="Turquoise water meeting a pale shoreline from above"><img class="b" id="par" src="img/waves.jpg" width="1400" height="2488" loading="lazy" alt="White surf on dark water seen from above"></div>
+  <div class="fade"><span class="cap" style="opacity:.6">The bay</span><h2>One beach, <em>no timetable.</em></h2><p>Our beach is a five-minute walk down a path lined with rosemary. There are no sun-lounger queues, no kids’ club and no loudspeakers. Only tide, towels and long lunches.</p>
+    <div class="facts"><div><b>12</b><span>Rooms</span></div><div><b>1</b><span>Beach</span></div><div><b>0</b><span>Schedules</span></div></div><a class="link" href="#days">A day at Maré →</a></div></section>
+
+<section class="rooms" id="rooms"><div class="head fade"><h2>Rooms &amp; <em>suites</em></h2><div class="arrows"><button id="prev" aria-label="Previous room">←</button><button id="next" aria-label="Next room">→</button></div></div>
+  <div class="track" id="track">
+    <article class="room"><div class="ph"><img src="img/room1.jpg" width="1600" height="1067" loading="lazy" alt="A bright room with white linen and a large window"></div><div class="meta"><h3>Garden Room</h3><span class="pr">From $310 / night</span></div><p>Soft light, white linen and a deep window seat looking out at the pines. Sleeps two.</p><button class="link" data-room="Garden Room" style="background:none;border-top:0;border-inline:0;cursor:pointer">Choose this room →</button></article>
+    <article class="room"><div class="ph"><img src="img/room2.jpg" width="1400" height="2100" loading="lazy" alt="A sunlit bedroom with greenery outside a tall window"></div><div class="meta"><h3>Sea Room</h3><span class="pr">From $420 / night</span></div><p>Wake up to the horizon. A king bed, a private terrace and a slow, salty breeze. Sleeps three.</p><button class="link" data-room="Sea Room" style="background:none;border-top:0;border-inline:0;cursor:pointer">Choose this room →</button></article>
+    <article class="room"><div class="ph"><img src="img/balcony.jpg" width="1400" height="1866" loading="lazy" alt="A whitewashed arch framing the sea with a small table and chairs"></div><div class="meta"><h3>Arch Suite</h3><span class="pr">From $690 / night</span></div><p>Our largest suite, with a whitewashed arch, a plunge bath and a terrace made for long evenings. Sleeps four.</p><button class="link" data-room="Arch Suite" style="background:none;border-top:0;border-inline:0;cursor:pointer">Choose this room →</button></article>
+  </div></section>
+
+<section class="days" id="days"><div class="grid">
+  <div class="sticky" aria-hidden="true"><img class="on" src="img/shore.jpg" alt=""><img src="img/balcony.jpg" alt=""><img src="img/retreat.jpg" alt=""><img src="img/waves.jpg" alt=""></div>
+  <div class="steps">
+    <div class="step" data-i="0"><img src="img/shore.jpg" alt="" loading="lazy"><span class="n">07</span><h3>Morning</h3><p>Coffee on the terrace, bread still warm from the kitchen. The water is flat and the beach is yours.</p></div>
+    <div class="step" data-i="1"><img src="img/balcony.jpg" alt="" loading="lazy"><span class="n">13</span><h3>Midday</h3><p>A long, late lunch in the shade of the arches. Salads, grilled fish, cold wine and no hurry at all.</p></div>
+    <div class="step" data-i="2"><img src="img/retreat.jpg" alt="" loading="lazy"><span class="n">19</span><h3>Evening</h3><p>The light turns gold, then pink, then blue. We light the lanterns and set the table on the rocks.</p></div>
+    <div class="step" data-i="3"><img src="img/waves.jpg" alt="" loading="lazy"><span class="n">23</span><h3>Night</h3><p>Windows open, the sea doing its quiet work. You will sleep better than you have in years.</p></div>
+  </div></div></section>
+
+<section class="reserve" id="reserve"><div class="ph"><img src="img/retreat.jpg" width="2000" height="1333" loading="lazy" alt="The retreat on a rocky headland above the sea at dusk"></div>
+  <div class="fm"><div><span class="cap" style="opacity:.6">Reserve</span><h2 style="margin-top:14px">Plan your <em>stay.</em></h2></div>
+    <div class="opts" id="opts"></div>
+    <div class="row"><div class="step2"><button id="m" aria-label="Fewer nights">−</button><output id="n" aria-live="polite">3 nights</output><button id="p" aria-label="More nights">+</button></div><span class="dim" style="opacity:.7" id="dates"></span></div>
+    <div class="sum" id="sum" aria-live="polite"></div>
+    <button class="go" id="go">Request this stay</button><p class="note" id="note" role="status"></p></div></section>
+</main>
+<footer><div class="big" aria-hidden="true">Maré</div><div class="cols"><span>© Maré · A small house above the sea</span><span><a href="/">← Back to MCD Webs</a> · Website by MCD Webs · Photos via <a href="https://unsplash.com" target="_blank" rel="noreferrer">Unsplash</a></span></div></footer>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)},$$=function(s){return[].slice.call(document.querySelectorAll(s))};
+  var red=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var nav=$("#nav");function sc(){nav.classList.toggle("solid",scrollY>window.innerHeight*.7)}sc();addEventListener("scroll",sc,{passive:true});
+  // fade-ins
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});$$(".fade").forEach(function(e){io.observe(e)});
+  // word reveal
+  var w=$("#words"),txt=w.textContent.trim().split(/\s+/);w.innerHTML=txt.map(function(t){return"<span>"+t+"</span>"}).join(" ");var sp=$$("#words span");
+  function rv(){var r=w.getBoundingClientRect(),p=(innerHeight*.85-r.top)/(r.height+innerHeight*.35);p=Math.max(0,Math.min(1,p));var n=Math.round(p*sp.length);sp.forEach(function(s,i){s.classList.toggle("on",i<n)})}
+  rv();addEventListener("scroll",rv,{passive:true});
+  // parallax on the small photo
+  var par=$("#par");if(!red)addEventListener("scroll",function(){var r=par.getBoundingClientRect(),c=r.top+r.height/2-innerHeight/2;par.style.transform="translateY("+(c*-.12).toFixed(1)+"px)"},{passive:true});
+  // rooms carousel
+  var tr=$("#track"),step=function(){return tr.querySelector(".room").getBoundingClientRect().width+28};
+  $("#next").onclick=function(){tr.scrollBy({left:step(),behavior:"smooth"})};$("#prev").onclick=function(){tr.scrollBy({left:-step(),behavior:"smooth"})};
+  var down=false,sx=0,sl=0;tr.addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse")return;down=true;sx=e.clientX;sl=tr.scrollLeft;tr.style.scrollSnapType="none";tr.style.cursor="grabbing"});
+  addEventListener("pointerup",function(){if(!down)return;down=false;tr.style.scrollSnapType="";tr.style.cursor=""});addEventListener("pointermove",function(e){if(down)tr.scrollLeft=sl-(e.clientX-sx)});
+  // day scrollytelling
+  var imgs=$$(".days .sticky img");var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=+e.target.dataset.i;imgs.forEach(function(m,k){m.classList.toggle("on",k===i)})}})},{threshold:.55});$$(".days .step").forEach(function(s){so.observe(s)});
+  // reservation
+  var rooms={"Garden Room":[310,"Sleeps 2"],"Sea Room":[420,"Sleeps 3"],"Arch Suite":[690,"Sleeps 4"]},room="Sea Room",nights=3;
+  function iso(d){return d.toISOString().slice(0,10)}var t=new Date();t.setDate(t.getDate()+14);var a=$("#in"),b=$("#out");a.min=b.min=iso(new Date());a.value=iso(t);var t2=new Date(t);t2.setDate(t2.getDate()+3);b.value=iso(t2);
+  function fromDates(){var n=Math.round((new Date(b.value)-new Date(a.value))/864e5);if(n>0){nights=Math.min(14,n)}render()}
+  a.addEventListener("change",function(){if(new Date(b.value)<=new Date(a.value)){var d=new Date(a.value);d.setDate(d.getDate()+nights);b.value=iso(d)}fromDates()});b.addEventListener("change",fromDates);
+  function money(n){return"$"+n.toLocaleString("en-US")}
+  function render(){
+    var o=$("#opts");o.innerHTML="";Object.keys(rooms).forEach(function(k){var x=document.createElement("button");x.type="button";x.className="opt";x.setAttribute("aria-pressed",k===room);x.innerHTML="<b>"+k+"</b><span>"+rooms[k][1]+" · "+money(rooms[k][0])+" / night</span>";x.onclick=function(){room=k;render()};o.appendChild(x)});
+    $("#n").textContent=nights+" night"+(nights>1?"s":"");var d=new Date(a.value);var e=new Date(d);e.setDate(e.getDate()+nights);var f=function(x){return x.toLocaleDateString("en-US",{month:"short",day:"numeric"})};$("#dates").textContent=isNaN(d)?"":f(d)+" – "+f(e);
+    var base=rooms[room][0]*nights,tax=Math.round(base*.1);$("#sum").innerHTML="<div><span>"+room+" × "+nights+"</span><span>"+money(base)+"</span></div><div><span>Taxes &amp; service (10%)</span><span>"+money(tax)+"</span></div><div class=\"t\"><span>Total</span><span>"+money(base+tax)+"</span></div>";
+  }
+  $("#m").onclick=function(){nights=Math.max(1,nights-1);setOut()};$("#p").onclick=function(){nights=Math.min(14,nights+1);setOut()};
+  function setOut(){var d=new Date(a.value);d.setDate(d.getDate()+nights);b.value=iso(d);render()}
+  $$("[data-room]").forEach(function(x){x.onclick=function(){room=x.dataset.room;render();$("#reserve").scrollIntoView()}});
+  $("#bar").addEventListener("submit",function(e){e.preventDefault();fromDates();$("#reserve").scrollIntoView()});
+  $("#go").onclick=function(){var g=this;g.disabled=true;g.textContent="Sending…";setTimeout(function(){g.disabled=false;g.textContent="Request this stay";$("#note").textContent="Thank you. This is a demo, so no request was sent."},900)};
+  render();
+})();
+</script></body></html>

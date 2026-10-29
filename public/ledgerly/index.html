@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ledgerly — Invoicing that gets you paid</title>
+<meta name="description" content="Send invoices, automate reminders and see your cash flow in one place. Built for freelancers and small studios.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--soft:#f5f6fa;--line:#e5e7ef;--ink:#0b1020;--mute:#5d6478;--blue:#2f5bff;--blue2:#e9eeff;--green:#12a150;--amber:#d98a00;--red:#e0364b;--r:14px}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font:16px/1.55 Geist,system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.mono{font-family:"Geist Mono",monospace}
+.wrap{width:min(1180px,100% - 48px);margin-inline:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:500;font-size:15px;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--soft)}.btn.p{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 6px 16px rgba(47,91,255,.28)}.btn.p:hover{background:#2449d6;transform:translateY(-1px)}
+.btn.d{background:var(--ink);border-color:var(--ink);color:#fff}.btn.d:hover{background:#1c2440}
+.btn.l{height:52px;padding:0 28px;font-size:16px;border-radius:12px}
+
+header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:36px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;letter-spacing:-.03em}.logo i{width:26px;height:26px;border-radius:8px;background:var(--blue);display:grid;place-items:center}.logo i::after{content:"";width:10px;height:10px;border:2.5px solid #fff;border-radius:2px;border-top-color:transparent;rotate:45deg;translate:0 1px}
+header nav{display:flex;gap:28px;font-size:15px;color:var(--mute)}header nav a:hover{color:var(--ink)}
+header .r{margin-left:auto;display:flex;gap:10px;align-items:center}.burger{display:none}
+
+.hero{padding:72px 0 0;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0 0 auto;height:640px;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 56px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/56px 100%;opacity:.45;mask:linear-gradient(#000,transparent 80%);-webkit-mask:linear-gradient(#000,transparent 80%)}
+.hero .wrap{position:relative}
+.chip{display:inline-flex;gap:10px;align-items:center;padding:6px 14px 6px 6px;border:1px solid var(--line);border-radius:99px;font-size:14px;background:#fff}.chip b{background:var(--blue2);color:var(--blue);padding:2px 10px;border-radius:99px;font-weight:600;font-size:12px}
+h1{font-size:clamp(44px,6.6vw,92px);line-height:1;letter-spacing:-.05em;font-weight:600;max-width:15ch;margin:24px 0}
+h1 span{color:var(--blue)}
+.hero p.lede{font-size:clamp(18px,1.6vw,21px);color:var(--mute);max-width:52ch}
+.signup{display:flex;gap:8px;margin-top:32px;max-width:480px;padding:6px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 8px 30px rgba(11,16,32,.06)}
+.signup input{flex:1;border:0;padding:0 12px;min-width:0;background:none;font-size:16px}.signup input:focus{outline:none}.signup:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px rgba(47,91,255,.12)}
+.fine{font-size:13px;color:var(--mute);margin-top:12px;min-height:20px}
+
+/* app mock */
+.app{margin-top:64px;border:1px solid var(--line);border-radius:20px 20px 0 0;background:var(--soft);box-shadow:0 -10px 80px rgba(47,91,255,.08),0 40px 100px rgba(11,16,32,.12);overflow:hidden}
+.bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:#fff;border-bottom:1px solid var(--line)}.bar i{width:11px;height:11px;border-radius:50%;background:#e1e4ec}.bar span{margin:0 auto;font-size:12px;color:var(--mute);padding:4px 40px;background:var(--soft);border-radius:8px}
+.app-body{display:grid;grid-template-columns:210px 1fr;min-height:480px}
+.side{padding:20px 14px;background:#fff;border-right:1px solid var(--line);display:grid;align-content:start;gap:4px;font-size:14px}.side a{padding:9px 12px;border-radius:8px;color:var(--mute)}.side a.on{background:var(--blue2);color:var(--blue);font-weight:600}
+.main{padding:24px;display:grid;gap:20px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}.kpi span{font-size:13px;color:var(--mute)}.kpi b{display:block;font-size:26px;letter-spacing:-.03em;margin-top:2px}.kpi small{font-size:12px;font-weight:600}
+.up{color:var(--green)}.dn{color:var(--red)}
+.row2{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.panel h4{font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.seg{display:inline-flex;background:var(--soft);border-radius:8px;padding:3px}.seg button{border:0;background:none;padding:4px 12px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--mute)}.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.chart{display:flex;align-items:flex-end;gap:10px;height:170px;border-bottom:1px solid var(--line)}
+.chart div{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(var(--blue),#7d97ff);transition:height .7s cubic-bezier(.22,1,.36,1);position:relative;min-width:0}
+.chart div:hover::after{content:attr(data-v);position:absolute;bottom:100%;left:50%;translate:-50% -6px;background:var(--ink);color:#fff;font-size:11px;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.labels{display:flex;gap:10px;margin-top:8px;font-size:11px;color:var(--mute)}.labels span{flex:1;text-align:center}
+.inv{display:grid;gap:2px}.inv div{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.inv div:last-child{border:0}.inv small{color:var(--mute);font-size:12px}.inv b{text-align:right;font-weight:600}
+.st{font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;justify-self:end}.paid{background:#e6f6ec;color:var(--green)}.pend{background:#fff3d9;color:var(--amber)}.over{background:#fde8eb;color:var(--red)}
+
+section{padding:clamp(72px,9vw,120px) 0}
+.kick{font:500 13px "Geist Mono",monospace;color:var(--blue);text-transform:uppercase;letter-spacing:.06em}
+h2{font-size:clamp(34px,4.6vw,58px);line-height:1.04;letter-spacing:-.04em;font-weight:600;margin:12px 0 16px;max-width:20ch}
+.sub{color:var(--mute);font-size:19px;max-width:52ch}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(230px,auto);gap:16px;margin-top:56px}
+.cell{border:1px solid var(--line);border-radius:20px;padding:28px;background:var(--soft);display:grid;align-content:space-between;gap:20px;overflow:hidden;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.cell:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(11,16,32,.08)}
+.cell h3{font-size:22px;letter-spacing:-.025em;font-weight:600}.cell p{color:var(--mute);margin-top:6px;font-size:15px;max-width:38ch}
+.c1{grid-column:span 4;background:var(--ink);color:#fff;border-color:var(--ink)}.c1 p{color:#a7aec6}.c2{grid-column:span 2}.c3{grid-column:span 2}.c4{grid-column:span 2}.c5{grid-column:span 2}
+.toggle{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.08);font-size:14px;margin-top:8px}
+.sw{width:42px;height:24px;border-radius:99px;background:#3b4463;position:relative;cursor:pointer;border:0;flex:none;transition:.25s}.sw::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.25s}.sw[aria-checked=true]{background:var(--blue)}.sw[aria-checked=true]::after{translate:18px 0}
+.remind{display:grid;gap:8px;margin-top:16px}.remind div{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.06);font-size:14px;opacity:.35;transition:.4s}.remind div.on{opacity:1;background:rgba(47,91,255,.22)}.remind i{width:8px;height:8px;border-radius:50%;background:#7d97ff}
+.cur{display:flex;gap:8px;flex-wrap:wrap}.cur button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font:500 13px "Geist Mono",monospace;cursor:pointer}.cur button[aria-pressed=true]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.big{font-size:44px;letter-spacing:-.04em;font-weight:600}
+.spark{width:100%;height:60px}.spark path{stroke-dasharray:400;stroke-dashoffset:400;animation:dash 2.4s .3s forwards}@keyframes dash{to{stroke-dashoffset:0}}
+
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:56px;border-radius:28px;background:linear-gradient(135deg,#eef2ff,#f8f9ff);border:1px solid #dde4ff}
+.calc label{display:flex;justify-content:space-between;font-weight:500;margin:28px 0 14px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--blue) var(--p,30%),#d5dcf5 var(--p,30%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid var(--blue);box-shadow:0 4px 12px rgba(47,91,255,.35);cursor:grab}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid var(--blue);cursor:grab}
+.res{background:#fff;border-radius:20px;padding:32px;border:1px solid #dde4ff;display:grid;gap:18px}.res .big{color:var(--blue);font-size:64px}.res p{color:var(--mute)}
+
+.ptop{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:20px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.tier{border:1px solid var(--line);border-radius:20px;padding:32px;display:grid;gap:22px;align-content:start}.tier.hot{border:2px solid var(--blue);box-shadow:0 20px 60px rgba(47,91,255,.14);position:relative}
+.tier.hot::before{content:"Most popular";position:absolute;top:-13px;left:28px;background:var(--blue);color:#fff;font-size:12px;font-weight:600;padding:3px 12px;border-radius:99px}
+.tier h3{font-size:20px}.tier .pr{font-size:52px;letter-spacing:-.05em;font-weight:600}.tier .pr small{font-size:15px;font-weight:400;color:var(--mute);letter-spacing:0}
+.tier ul{list-style:none;padding:0;display:grid;gap:10px;font-size:15px}.tier li::before{content:"✓";color:var(--blue);font-weight:700;margin-right:10px}
+
+.faq{max-width:820px;margin-top:40px;border-top:1px solid var(--line)}.faq details{border-bottom:1px solid var(--line)}.faq summary{list-style:none;cursor:pointer;padding:22px 0;font-size:19px;font-weight:500;display:flex;justify-content:space-between;gap:20px}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";font-size:26px;line-height:1;color:var(--blue);transition:.3s}.faq details[open] summary::after{rotate:45deg}.faq p{padding:0 0 22px;color:var(--mute);max-width:60ch}
+.cta{background:var(--blue);color:#fff;border-radius:28px;padding:clamp(40px,7vw,88px);text-align:center;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 80% 0,rgba(255,255,255,.2),transparent);pointer-events:none}
+.cta h2{margin-inline:auto;max-width:16ch;font-size:clamp(38px,6vw,76px);position:relative}.cta p{opacity:.85;margin-bottom:32px;position:relative}.cta .btn{position:relative;background:#fff;color:var(--blue);border-color:#fff;font-weight:600}
+footer{padding:56px 0 40px;font-size:14px;color:var(--mute)}footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px}footer a:hover{color:var(--ink)}
+
+@media(max-width:900px){header nav{display:none}.app-body{grid-template-columns:1fr}.side{display:none}.row2,.calc{grid-template-columns:1fr}.calc{padding:28px;gap:32px}.bento{grid-template-columns:1fr}.c1,.c2,.c3,.c4,.c5{grid-column:auto}.tiers{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr 1fr}.kpi b{font-size:20px}.kpi{padding:12px}}
+@media(max-width:560px){.kpis{grid-template-columns:1fr}.signup{flex-direction:column}.signup input{height:44px}header .r .btn:not(.p){display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.spark path{stroke-dashoffset:0}}
+</style></head><body>
+<header><div class="wrap"><a class="logo" href="#top"><i></i>Ledgerly</a>
+  <nav aria-label="Main"><a href="#features">Product</a><a href="#roi">ROI</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav>
+  <div class="r"><a class="btn" href="#top">Sign in</a><a class="btn p" href="#start">Start free</a></div></div></header>
+<main id="top">
+<div class="hero"><div class="wrap">
+  <span class="chip"><b>New</b> Automatic payment reminders →</span>
+  <h1>Get paid faster, <span>without chasing.</span></h1>
+  <p class="lede">Ledgerly turns invoicing into a quiet background task. Send beautiful invoices, let reminders do the nagging, and watch your cash flow in real time.</p>
+  <form class="signup" id="start" novalidate><input type="email" name="e" placeholder="you@studio.com" aria-label="Email address" autocomplete="email"><button class="btn p" type="submit">Start free</button></form>
+  <p class="fine" id="fine">Free for 14 days. No credit card needed.</p>
+
+  <div class="app" aria-label="Product preview">
+    <div class="bar"><i></i><i></i><i></i><span>app.ledgerly.example/dashboard</span></div>
+    <div class="app-body">
+      <div class="side"><a class="on" href="#top">Overview</a><a href="#top">Invoices</a><a href="#top">Clients</a><a href="#top">Expenses</a><a href="#top">Reports</a><a href="#top">Settings</a></div>
+      <div class="main">
+        <div class="kpis"><div class="kpi"><span>Paid this month</span><b id="k1">$18,420</b><small class="up">▲ 12.4%</small></div><div class="kpi"><span>Outstanding</span><b>$6,180</b><small class="dn">3 overdue</small></div><div class="kpi"><span>Avg. days to pay</span><b id="k3">9.2</b><small class="up">▼ 4 days</small></div></div>
+        <div class="row2">
+          <div class="panel"><h4>Revenue <span class="seg" role="group" aria-label="Range"><button aria-pressed="true" data-r="6m">6M</button><button aria-pressed="false" data-r="12m">12M</button></span></h4><div class="chart" id="chart"></div><div class="labels" id="labels"></div></div>
+          <div class="panel"><h4>Recent invoices</h4><div class="inv">
+            <div><span>Northwind Studio<br><small>INV-1042 · Due May 28</small></span><b>$4,200</b><span></span><span class="st paid">Paid</span></div>
+            <div><span>Alder &amp; Co<br><small>INV-1041 · Due Jun 2</small></span><b>$1,850</b><span></span><span class="st pend">Pending</span></div>
+            <div><span>Brightside Labs<br><small>INV-1039 · Due May 14</small></span><b>$2,900</b><span></span><span class="st over">Overdue</span></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<section id="features"><div class="wrap"><span class="kick">Product</span><h2>Everything between “sent” and “paid”.</h2><p class="sub">Invoicing tools are usually a pile of forms. Ledgerly is built around the part you actually care about: the money arriving.</p>
+  <div class="bento">
+    <div class="cell c1"><div><h3>Reminders that sound like you</h3><p>Polite, timed nudges go out automatically before and after the due date. Toggle one off and it stops.</p></div>
+      <div><div class="toggle"><button class="sw" role="switch" aria-checked="true" id="sw" aria-label="Auto reminders"></button><span id="swt">Automatic reminders are on</span></div>
+      <div class="remind" id="remind"><div class="on"><i></i>3 days before due · “Friendly heads-up”</div><div class="on"><i></i>On the due date · “Invoice due today”</div><div class="on"><i></i>7 days late · “Can we help?”</div></div></div></div>
+    <div class="cell c2"><div><h3>Bill in any currency</h3><p>Live rates, clean totals.</p></div><div><p class="big mono" id="amt">$1,000</p><div class="cur" id="cur" style="margin-top:14px"></div></div></div>
+    <div class="cell c3"><div><h3>Cash flow, forecast</h3><p>See next month before it happens.</p></div><svg class="spark" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50C20 48 30 30 50 34s30 18 50 6 30-30 50-26 30 10 50-8" fill="none" stroke="#2f5bff" stroke-width="3" stroke-linecap="round"/></svg></div>
+    <div class="cell c4"><div><h3>Bank-level security</h3><p>Encrypted at rest and in transit, with two-factor sign-in.</p></div><div class="mono" style="font-size:13px;color:var(--mute)">AES-256 · 2FA</div></div>
+    <div class="cell c5"><div><h3>Branded templates</h3><p>Your logo, your colors, your tone. Invoices clients actually enjoy opening.</p></div><div style="display:flex;gap:8px"><span style="width:28px;height:28px;border-radius:50%;background:#2f5bff"></span><span style="width:28px;height:28px;border-radius:50%;background:#0b1020"></span><span style="width:28px;height:28px;border-radius:50%;background:#12a150"></span><span style="width:28px;height:28px;border-radius:50%;background:#e0364b"></span></div></div>
+  </div></div></section>
+
+<section id="roi" style="padding-top:0"><div class="wrap"><div class="calc">
+  <div><span class="kick">ROI</span><h2 style="margin-bottom:0">What could you get back?</h2><label for="n"><span>Invoices per month</span><b class="mono" id="nv">30</b></label><input id="n" type="range" min="5" max="200" value="30"><label for="h"><span>Minutes spent per invoice</span><b class="mono" id="hv">20</b></label><input id="h" type="range" min="5" max="60" value="20"></div>
+  <div class="res"><p>You could save about</p><div class="big" id="saved">8.0 hrs</div><p id="ex">every month. At $60/hr, that’s roughly <b style="color:var(--ink)" id="money">$480</b> back in your pocket.</p></div>
+</div></div></section>
+
+<section id="pricing" style="padding-top:0"><div class="wrap"><div class="ptop"><div><span class="kick">Pricing</span><h2 style="margin-bottom:0">Simple, honest pricing.</h2></div><div class="seg" role="group" aria-label="Billing"><button aria-pressed="true" data-b="m">Monthly</button><button aria-pressed="false" data-b="y">Annual · 2 months free</button></div></div>
+  <div class="tiers">
+    <div class="tier"><h3>Solo</h3><p class="pr" data-m="12">$12<small> / month</small></p><ul><li>Up to 10 invoices a month</li><li>Automatic reminders</li><li>1 currency</li></ul><a class="btn" href="#start">Start free</a></div>
+    <div class="tier hot"><h3>Studio</h3><p class="pr" data-m="29">$29<small> / month</small></p><ul><li>Unlimited invoices</li><li>Multi-currency</li><li>Cash-flow reports</li><li>Branded templates</li></ul><a class="btn p" href="#start">Start free</a></div>
+    <div class="tier"><h3>Team</h3><p class="pr" data-m="79">$79<small> / month</small></p><ul><li>Everything in Studio</li><li>5 team members</li><li>Roles &amp; approvals</li><li>Priority support</li></ul><a class="btn" href="#start">Start free</a></div>
+  </div></div></section>
+
+<section id="faq" style="padding-top:0"><div class="wrap"><span class="kick">FAQ</span><h2>Questions, answered.</h2>
+  <div class="faq"><details><summary>Do my clients need an account to pay?</summary><p>No. They get a secure link, review the invoice and pay by card or bank transfer without signing up for anything.</p></details>
+  <details><summary>Can I import my existing clients and invoices?</summary><p>Yes. Upload a CSV or connect your accounting tool and your history comes with you in a few minutes.</p></details>
+  <details><summary>How do payments work?</summary><p>Ledgerly connects to your payment provider and your bank. Funds go straight to you, and invoices are marked paid automatically.</p></details>
+  <details><summary>What happens after the free trial?</summary><p>You choose a plan or drop to the free tier. Nothing is charged without your say-so, and you can cancel any time.</p></details></div></div></section>
+
+<section style="padding-top:0"><div class="wrap"><div class="cta"><h2>Send your next invoice in a minute.</h2><p>Join in two minutes. Your first 14 days are free.</p><a class="btn l" href="#start">Start free</a></div></div></section>
+</main>
+<footer><div class="wrap"><span>© Ledgerly · Invoicing for small studios</span><span><a href="/">← Back to MCD Webs</a> · Website by MCD Webs</span></div></footer>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)},$$=function(s){return[].slice.call(document.querySelectorAll(s))};
+  var D={"6m":[["Dec",42],["Jan",58],["Feb",51],["Mar",70],["Apr",64],["May",88]],"12m":[["Jun",30],["Jul",36],["Aug",34],["Sep",44],["Oct",40],["Nov",52],["Dec",42],["Jan",58],["Feb",51],["Mar",70],["Apr",64],["May",88]]};
+  function chart(k){var c=$("#chart"),l=$("#labels");c.innerHTML="";l.innerHTML="";D[k].forEach(function(d,i){var b=document.createElement("div");b.style.height="0";b.dataset.v="$"+d[1]+"k";c.appendChild(b);setTimeout(function(){b.style.height=d[1]+"%"},60+i*40);var s=document.createElement("span");s.textContent=d[0];l.appendChild(s)})}
+  chart("6m");$$("[data-r]").forEach(function(b){b.onclick=function(){$$("[data-r]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});chart(b.dataset.r)}});
+  var sw=$("#sw");sw.onclick=function(){var on=sw.getAttribute("aria-checked")!=="true";sw.setAttribute("aria-checked",on);$("#swt").textContent=on?"Automatic reminders are on":"Automatic reminders are off";$$("#remind div").forEach(function(d,i){setTimeout(function(){d.classList.toggle("on",on)},i*90)})};
+  var cur={USD:["$",1],EUR:["€",.92],GBP:["£",.79],ILS:["₪",3.7]},cs="USD";
+  function curs(){var w=$("#cur");w.innerHTML="";Object.keys(cur).forEach(function(k){var b=document.createElement("button");b.textContent=k;b.setAttribute("aria-pressed",k===cs);b.onclick=function(){cs=k;curs();$("#amt").textContent=cur[k][0]+Math.round(1000*cur[k][1]).toLocaleString("en-US")};w.appendChild(b)})}curs();
+  function calc(){var n=+$("#n").value,h=+$("#h").value,sv=Math.round(n*h*.4/6)/10;$("#nv").textContent=n;$("#hv").textContent=h;$("#saved").textContent=sv.toFixed(1)+" hrs";$("#money").textContent="$"+Math.round(sv*60).toLocaleString("en-US");
+    [$("#n"),$("#h")].forEach(function(r){r.style.setProperty("--p",(r.value-r.min)/(r.max-r.min)*100+"%")})}
+  $$("#n,#h").forEach(function(r){r.addEventListener("input",calc)});calc();
+  $$("[data-b]").forEach(function(b){b.onclick=function(){$$("[data-b]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});var y=b.dataset.b==="y";$$("[data-m]").forEach(function(p){var v=y?Math.round(p.dataset.m*10/12):+p.dataset.m;p.innerHTML="$"+v+"<small> / month"+(y?", billed yearly":"")+"</small>"})}});
+  $("#start").addEventListener("submit",function(e){e.preventDefault();var i=e.target.e;$("#fine").textContent=i.value&&i.validity.valid?"Thanks! This is a demo, so no account was created.":"Please enter a valid email address.";if(i.value&&i.validity.valid)i.value=""});
+})();
+</script></body></html>

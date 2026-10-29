@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROOK — Electric bikes for loud cities</title>
+<meta name="description" content="Rook builds light, fast, no-nonsense electric bikes. Book a test ride.">
+<meta name="theme-color" content="#ffe500">
+<link rel="icon" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--y:#ffe500;--k:#0d0d0d;--p:#f2f0e8;--r:#ff3b1d;--b:#2b4cff;--frame:#ffe500;--bd:3px solid var(--k)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--p);color:var(--k);font:17px/1.5 Archivo,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--b);outline-offset:2px}
+.an{font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-weight:400;line-height:.88;letter-spacing:.005em}
+.mo{font-family:"Space Mono",monospace;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;background:var(--y);border:var(--bd);font:800 17px Archivo;text-transform:uppercase;cursor:pointer;box-shadow:6px 6px 0 var(--k);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--k)}.btn:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--k)}
+.btn.k{background:var(--k);color:var(--y);box-shadow:6px 6px 0 var(--y)}.btn.k:hover{box-shadow:9px 9px 0 var(--y)}.btn.w{background:#fff}
+
+.tick{background:var(--k);color:var(--y);overflow:hidden;white-space:nowrap;border-bottom:var(--bd)}
+.tick div{display:inline-flex;animation:mq 26s linear infinite;padding:9px 0}.tick span{margin-right:44px}.tick span::after{content:"▲";margin-left:44px;color:var(--r)}
+@keyframes mq{to{transform:translateX(-50%)}}
+header{display:flex;align-items:stretch;border-bottom:var(--bd);background:var(--p);position:sticky;top:0;z-index:40}
+.logo{background:var(--k);color:var(--y);padding:10px 24px;font:400 40px/1 Anton;letter-spacing:.04em;display:flex;align-items:center}
+header nav{display:flex;flex:1}header nav a{display:flex;align-items:center;padding:0 28px;border-right:var(--bd);font-weight:800;text-transform:uppercase;font-size:15px;transition:background .15s}header nav a:hover{background:var(--y)}
+header .cta{display:flex;align-items:center;padding:0 20px;margin-left:auto}header .cta .btn{min-height:44px;box-shadow:4px 4px 0 var(--k);padding:0 18px;font-size:15px}
+.burger{display:none}
+
+.hero{display:grid;grid-template-columns:1.05fr 1fr;border-bottom:var(--bd);min-height:calc(100vh - 120px)}
+.hl{padding:clamp(28px,4.5vw,64px);display:flex;flex-direction:column;justify-content:space-between;gap:36px;border-right:var(--bd);position:relative}
+h1{font-size:clamp(88px,15.5vw,250px)}h1 span{display:block;-webkit-text-stroke:3px var(--k);color:transparent}
+.hl p{max-width:34ch;font-size:clamp(18px,1.6vw,22px);font-weight:500}.hl .acts{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px}
+.stk{position:absolute;right:-26px;top:38%;rotate:12deg;background:var(--r);color:#fff;border:var(--bd);padding:16px 22px;font:400 30px/1 Anton;box-shadow:6px 6px 0 var(--k);text-transform:uppercase;z-index:3;animation:wob 3s ease-in-out infinite}
+@keyframes wob{50%{rotate:8deg}}
+.hr{background:var(--frame);position:relative;display:grid;place-items:center;overflow:hidden;transition:background .5s}
+.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%}
+.tagline{position:absolute;left:24px;bottom:24px;z-index:2;background:var(--y);border:var(--bd);padding:10px 16px;box-shadow:5px 5px 0 var(--k);display:grid;gap:2px}.tagline b{font:400 32px/1 Anton;text-transform:uppercase}
+
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:var(--bd)}
+.nums div{padding:28px;border-right:var(--bd)}.nums div:last-child{border-right:0}.nums b{display:block;font:400 clamp(60px,7vw,110px)/.9 Anton}.nums span{font-weight:700;text-transform:uppercase}
+
+.sec{padding:clamp(48px,7vw,96px) clamp(18px,4vw,56px);border-bottom:var(--bd)}
+h2{font-size:clamp(56px,9vw,140px);margin-bottom:40px}h2 em{font-style:normal;background:var(--y);padding:0 .12em;border:var(--bd);display:inline-block;rotate:-1.5deg}
+.models{display:grid;grid-template-columns:repeat(3,1fr);border:var(--bd);background:#fff;box-shadow:10px 10px 0 var(--k)}
+.model{padding:32px;border-right:var(--bd);display:flex;flex-direction:column;gap:20px;transition:background .2s;position:relative}.model:last-child{border:0}
+.model.pick{background:var(--y)}.model.pick::before{content:"PICKED";position:absolute;top:0;right:0;background:var(--k);color:var(--y);font:700 12px "Space Mono";padding:6px 12px}
+.model h3{font-size:clamp(56px,6vw,88px)}.model .pr{font:400 36px Anton}.model ul{list-style:none;padding:0;border-top:var(--bd)}.model li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:2px solid var(--k);font-weight:500}.model li b{font-family:"Space Mono";font-size:14px}
+.model .btn{margin-top:auto;min-height:48px}
+.finder{display:grid;grid-template-columns:1fr 1fr;border:var(--bd);margin-top:56px;box-shadow:10px 10px 0 var(--k)}
+.finder>div{padding:clamp(24px,4vw,48px)}.finder .l{background:var(--p);border-right:var(--bd)}.finder .r{background:var(--k);color:var(--y)}
+.finder h3{font-size:clamp(40px,5vw,72px);margin-bottom:28px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:18px;background:#fff;border:var(--bd);margin:28px 0 10px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:42px;background:var(--r);border:var(--bd);cursor:ew-resize;box-shadow:3px 3px 0 var(--k)}
+input[type=range]::-moz-range-thumb{width:30px;height:40px;background:var(--r);border:var(--bd);border-radius:0;cursor:ew-resize}
+.km{font:400 clamp(80px,10vw,150px)/.9 Anton}.km small{font-size:.3em;margin-left:8px}
+.rec b{font:400 clamp(70px,8vw,120px)/.9 Anton;display:block;color:#fff}.rec p{margin-top:12px;max-width:34ch}
+
+.feat{display:grid;grid-template-columns:1fr 1fr;border:var(--bd)}
+.fc{padding:clamp(28px,4vw,52px);min-height:360px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;border-right:var(--bd);border-bottom:var(--bd);transition:transform .2s}
+.fc:nth-child(2n){border-right:0}.fc:nth-last-child(-n+2){border-bottom:0}
+.fc b{font:400 clamp(90px,11vw,170px)/.8 Anton;opacity:.95}.fc h3{font-size:clamp(34px,4vw,56px);margin-bottom:10px}.fc p{max-width:36ch;font-weight:500}
+.f1{background:var(--r);color:#fff}.f2{background:var(--b);color:#fff}.f3{background:var(--y)}.f4{background:var(--k);color:var(--y)}
+.fc:hover{transform:scale(1.015);z-index:2;box-shadow:0 0 0 var(--k)}
+
+.ride{background:var(--y);display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.form{display:grid;gap:16px;background:var(--p);border:var(--bd);padding:clamp(22px,3vw,40px);box-shadow:10px 10px 0 var(--k)}
+.form label{display:grid;gap:6px;font:700 13px "Space Mono";text-transform:uppercase}
+.form input,.form select{min-height:52px;padding:0 14px;border:var(--bd);background:#fff;font:500 17px Archivo;border-radius:0}
+.form input:focus,.form select:focus{outline:none;background:var(--y);box-shadow:4px 4px 0 var(--k)}
+.form .btn{background:var(--k);color:var(--y);box-shadow:6px 6px 0 var(--r)}.note{min-height:24px;font-weight:700}
+footer{background:var(--k);color:var(--y);padding:36px clamp(18px,4vw,56px) 24px;overflow:hidden}footer .w{font:400 clamp(120px,36vw,640px)/.78 Anton;letter-spacing:.02em;margin-bottom:28px;color:transparent;-webkit-text-stroke:3px var(--y)}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+
+@media(max-width:900px){
+  header{flex-wrap:wrap}header nav{display:none;order:3;flex:0 0 100%;flex-direction:column;border-top:var(--bd)}header nav.open{display:flex}header nav a{padding:18px 24px;border-right:0;border-bottom:var(--bd)}
+  .burger{display:block;margin-left:auto;padding:0 22px;border:0;border-left:var(--bd);background:var(--y);font:800 15px Archivo;cursor:pointer;text-transform:uppercase}header .cta{display:none}
+  .hero{grid-template-columns:1fr}.hl{border-right:0;border-bottom:var(--bd)}.hr{min-height:360px}.stk{right:10px;top:16px}
+  .nums{grid-template-columns:1fr 1fr}.nums div:nth-child(2){border-right:0}.nums div:nth-child(-n+2){border-bottom:var(--bd)}
+  .models,.finder,.feat,.ride{grid-template-columns:1fr}.model{border-right:0;border-bottom:var(--bd)}.model:last-child{border-bottom:0}.finder .l{border-right:0;border-bottom:var(--bd)}
+  .fc{border-right:0!important;border-bottom:var(--bd)!important;min-height:280px}.fc:last-child{border-bottom:0!important}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="tick mo" aria-hidden="true"><div><span>Free test rides every weekend</span><span>2-year warranty</span><span>Assembled in 48 hours</span><span>Free test rides every weekend</span><span>2-year warranty</span><span>Assembled in 48 hours</span><span>Free test rides every weekend</span><span>2-year warranty</span><span>Assembled in 48 hours</span><span>Free test rides every weekend</span><span>2-year warranty</span><span>Assembled in 48 hours</span></div></div>
+<header><a class="logo" href="#top">ROOK</a><nav id="nav" aria-label="Main"><a href="#models">Models</a><a href="#finder">Find yours</a><a href="#tech">Tech</a><a href="#ride">Test ride</a></nav><div class="cta"><a class="btn" href="#ride">Book a test ride</a></div><button class="burger" id="bg" aria-expanded="false">Menu</button></header>
+<main id="top">
+<div class="hero">
+  <div class="hl"><div><h1 class="an">Ride<span>Loud.</span></h1></div>
+    <div><p>Light, fast, no-nonsense electric bikes for people who’d rather be moving than parking. Built in a small workshop, sold straight to you.</p><div class="acts"><a class="btn" href="#models">See the bikes</a><a class="btn w" href="#ride">Book a test ride</a></div></div>
+    <div class="stk">From $1,890</div></div>
+  <div class="hr" id="hr">
+    <img class="photo" src="img/bike.jpg" width="1200" height="2131" alt="A pale yellow Rook electric bike parked on a quiet street under palm trees" fetchpriority="high">
+    <div class="tagline"><b>Rook M</b><span class="mo">110 km · 17 kg · from $2,490</span></div>
+  </div>
+</div>
+<div class="nums"><div><b>160</b><span>km max range</span></div><div><b>17</b><span>kg, frame and all</span></div><div><b>3.5</b><span>hour full charge</span></div><div><b>0</b><span>apps required</span></div></div>
+
+<section class="sec" id="models"><h2 class="an">Pick your <em>weapon.</em></h2>
+  <div class="models">
+    <div class="model" data-m="S"><h3 class="an">Rook S</h3><p class="mo">The commuter</p><ul><li>Range<b>70 km</b></li><li>Weight<b>15 kg</b></li><li>Motor<b>250 W</b></li><li>Gears<b>Single</b></li></ul><p class="pr">$1,890</p><button class="btn" data-pick="S">Pick the S</button></div>
+    <div class="model" data-m="M"><h3 class="an">Rook M</h3><p class="mo">The all-rounder</p><ul><li>Range<b>110 km</b></li><li>Weight<b>17 kg</b></li><li>Motor<b>350 W</b></li><li>Gears<b>8-speed</b></li></ul><p class="pr">$2,490</p><button class="btn" data-pick="M">Pick the M</button></div>
+    <div class="model" data-m="X"><h3 class="an">Rook X</h3><p class="mo">The long hauler</p><ul><li>Range<b>160 km</b></li><li>Weight<b>20 kg</b></li><li>Motor<b>500 W</b></li><li>Gears<b>10-speed</b></li></ul><p class="pr">$3,290</p><button class="btn" data-pick="X">Pick the X</button></div>
+  </div>
+  <div class="finder" id="finder"><div class="l"><h3 class="an">How far do you ride?</h3><p class="mo">Daily distance, round trip</p><input type="range" id="km" min="5" max="60" value="22" aria-label="Daily kilometers"><div class="km" id="kmv">22<small>km / day</small></div></div>
+    <div class="r"><p class="mo">We’d put you on</p><div class="rec"><b class="an" id="recm">Rook M</b><p id="recp"></p><a class="btn w" href="#ride" style="margin-top:24px;color:var(--k)">Test ride it</a></div></div></div>
+</section>
+
+<section class="sec" id="tech" style="background:var(--p)"><h2 class="an">Built <em>different.</em></h2>
+  <div class="feat">
+    <div class="fc f1"><b>01</b><div><h3 class="an">Torque sensor</h3><p>The motor responds to how hard you pedal, so it feels like you got stronger, not like you’re on a scooter.</p></div></div>
+    <div class="fc f2"><b>02</b><div><h3 class="an">Swap battery</h3><p>Pop it out with a key, charge it at your desk. No cables hanging off your bike in the hallway.</p></div></div>
+    <div class="fc f3"><b>03</b><div><h3 class="an">Hydraulic brakes</h3><p>Four-piston stopping power that doesn’t care about rain, hills or bad decisions.</p></div></div>
+    <div class="fc f4"><b>04</b><div><h3 class="an">Built-in tracker</h3><p>A hidden GPS tracker and a motor lock, so a stolen Rook is just a very heavy bike.</p></div></div>
+  </div></section>
+
+<section class="sec ride" id="ride"><div><h2 class="an" style="margin-bottom:24px">Take one <em style="background:var(--p)">out.</em></h2><p style="font-size:22px;max-width:30ch;font-weight:500">Free 30-minute test rides at our workshop every weekend. No sales pitch, just a bike and a map.</p><p class="mo" style="margin-top:28px">Sat &amp; Sun · 10:00 – 16:00<br>Workshop 4, Dock Street</p></div>
+  <form class="form" id="form" novalidate><label>Name<input name="n" autocomplete="name"></label><label>Email<input name="e" type="email" autocomplete="email"></label>
+    <label>Model<select name="m" id="msel"><option value="S">Rook S</option><option value="M" selected>Rook M</option><option value="X">Rook X</option></select></label>
+    <label>Day<select name="d"><option>This Saturday</option><option>This Sunday</option><option>Next Saturday</option><option>Next Sunday</option></select></label>
+    <button class="btn" type="submit">Book my test ride</button><p class="note" id="note" role="status"></p></form></section>
+</main>
+<footer><div class="w an" aria-hidden="true">Rook</div><div class="row mo"><span>© Rook Electric</span><span><a href="/">← Back to MCD Webs</a> · Website by MCD Webs · Photo via <a href="https://unsplash.com" target="_blank" rel="noreferrer">Unsplash</a></span></div></footer>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)},$$=function(s){return[].slice.call(document.querySelectorAll(s))};
+  $("#bg").onclick=function(){var o=$("#nav").classList.toggle("open");this.setAttribute("aria-expanded",o)};
+  $$("#nav a").forEach(function(a){a.onclick=function(){$("#nav").classList.remove("open")}});
+  var M={S:{r:70,n:"Rook S",p:1890},M:{r:110,n:"Rook M",p:2490},X:{r:160,n:"Rook X",p:3290}},pick="M";
+  function mark(){$$(".model").forEach(function(m){m.classList.toggle("pick",m.dataset.m===pick)});$("#msel").value=pick}
+  $$("[data-pick]").forEach(function(b){b.onclick=function(){pick=b.dataset.pick;mark();$("#ride").scrollIntoView()}});mark();
+  var k=$("#km");function f(){var v=+k.value;$("#kmv").innerHTML=v+"<small>km / day</small>";k.style.background="linear-gradient(90deg,#ffe500 "+((v-5)/55*100)+"%,#fff "+((v-5)/55*100)+"%)";
+    var m=v*3<=70?"S":v*3<=110?"M":"X";if(v*3>160)m="X";$("#recm").textContent=M[m].n;var d=Math.max(1,Math.floor(M[m].r/v));$("#recp").textContent="About "+M[m].r+" km on a charge, so you’d plug in roughly every "+d+" day"+(d>1?"s":"")+". From $"+M[m].p.toLocaleString("en-US")+".";pick=m;mark()}
+  k.addEventListener("input",f);f();
+  $("#form").addEventListener("submit",function(e){e.preventDefault();var x=e.target;if(!x.n.value||!x.e.value||!x.e.validity.valid){$("#note").textContent="Name and a valid email, please.";return}$("#note").textContent="You’re in, "+x.n.value+". This is a demo, so no booking was made.";x.reset()});
+})();
+</script></body></html>
